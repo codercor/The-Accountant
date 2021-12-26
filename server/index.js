@@ -1,5 +1,4 @@
 const express = require ('express'); //express web server framework
-const bodyParser= require('body-parser'); //parser for post requests data
 const pdf = require('html-pdf'); //generate pdf from html
 const cors = require('cors'); //cors error block
 const mongoose = require('mongoose') //mongoose for database connection
@@ -12,13 +11,16 @@ const product = require('./models/product.models.js');
 //represents application
 const app = express(); //create express server
 const port =  3001; //port for server
+require('dotenv').config(); //configure dotenv
+//routes
+const authRoute = require('./routes/auth.route');
 
 app.use(cors()); //use cors
-app.use(bodyParser.urlencoded({extended: true})); 
-app.use(bodyParser.json()); //for each request, parse body of request
+app.use(express.urlencoded({extended: true})); 
+app.use(express.json()); //for each request, parse body of request
 
 //db connection
-mongoose.connect('mongodb+srv://admin:admin@cluster0.3pffc.mongodb.net/the_accountant?retryWrites=true&w=majority'),
+mongoose.connect(process.env.DB_CONNECTION_STRING),
 {
     useNewUrlParser: true,
     useFindAndModify: false,
@@ -29,6 +31,8 @@ db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", function () {
   console.log("Connected successfully");
 });
+
+app.use("/auth", authRoute);
 
 //create customer
 app.post('/create-customer', async (req, res) => {
