@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     required: false,
   },
   uid: {
-    type: Number,
+    type: String,
     required: false
   },
   bankAccount: {
@@ -26,18 +26,19 @@ const userSchema = new mongoose.Schema({
     required: false
   },
   telefon: {
-    type: Number,
+    type: String,
     required: false
   },
   email: {
     type: String,
     required: true 
+  },
+  password: {
+    type: String,
+    required: true
   }
 });
-userSchema.methods.comparePassword = function(candidatePassword) {
-  console.log(this)
-  return true;
-};
+
 const user = mongoose.model("user", userSchema);
 
 module.exports = user;

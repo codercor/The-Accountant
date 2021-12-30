@@ -14,7 +14,7 @@ const port =  3001; //port for server
 require('dotenv').config(); //configure dotenv
 //routes
 const authRoute = require('./routes/auth.route');
-
+const userRoute = require('./routes/user.route');
 app.use(cors()); //use cors
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json()); //for each request, parse body of request
@@ -33,6 +33,7 @@ db.once("open", function () {
 });
 
 app.use("/auth", authRoute);
+app.use('/user',userRoute);
 
 //create customer
 app.post('/create-customer', async (req, res) => {
