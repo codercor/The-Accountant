@@ -13,6 +13,7 @@ const authController = {
     login: (req, res) => { //localhost:3000/auth/login
 
         const { username, password } = req.body;
+        console.log(username,password);
         //check if username and password are correct from database
         userModel.findOne({ username,password }, (err, user) => {
             if (err || !user) {

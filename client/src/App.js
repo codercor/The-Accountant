@@ -8,7 +8,8 @@ import { Route, Routes } from 'react-router-dom';
 
 //panel routes
 import Home from './views/panel/Home';
-const Panel = {Home}
+import Customer from './views/panel/Customer';
+const Panel = {Home,Customer}
 export default function App() {
   return (
     <>
@@ -19,9 +20,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/panel">
           <Route index element={<Panel.Home/>} />
-          <Route path="add-customer" element={<h1>customers</h1>} />
-          <Route path="add-product" element={<h1>products</h1>} />
-          <Route path="todo" element={<h1>todo</h1>} />
+          <Route path="customer" element={<Panel.Customer/>} />
         </Route> 
       </Routes>
     </>

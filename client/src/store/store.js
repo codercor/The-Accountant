@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import userSlice from './slices/userSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 
+import userSlice from './slices/userSlice';
+import customerSlice from './slices/customerSlice';
 
 const reducers = combineReducers({
-    user: userSlice
+    user: userSlice,
+    customer: customerSlice
 });
 
 
