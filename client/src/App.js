@@ -13,7 +13,7 @@ import Footer from './components/panel/common/Footer';
 const Panel = {Home,Customer}
 export default function App() {
   return (
-    <Box display="flex" flexDirection="column" height="100vh" >
+    <Box >
       <AppBar />
       <Routes>
         <Route path="/" element={<CreateCustomer />} />
@@ -24,12 +24,7 @@ export default function App() {
           <Route path="customer" element={<Panel.Customer/>} />
         </Route> 
       </Routes>
-      <Footer sx={
-        {
-          display: "flex",
-          alignSelf: "flex-end",
-        }
-      } />
+
     </Box>
   )
 }

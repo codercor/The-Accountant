@@ -4,9 +4,8 @@ const cors = require('cors'); //cors error block
 const mongoose = require('mongoose') //mongoose for database connection
 const pdfTemplate = require('./documents'); //html template for pdf
 //models
-const customerModel = require('./models/customer.models.js')
+const customerModel = require('./models/customer.model.js')
 const productModel = require('./models/product.models.js');
-const product = require('./models/product.models.js');
 
 //represents application
 const app = express(); //create express server
@@ -15,6 +14,7 @@ require('dotenv').config(); //configure dotenv
 //routes
 const authRoute = require('./routes/auth.route');
 const userRoute = require('./routes/user.route');
+const customerRoute = require('./routes/customer.route');
 app.use(cors()); //use cors
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json()); //for each request, parse body of request
@@ -34,6 +34,7 @@ db.once("open", function () {
 
 app.use("/auth", authRoute);
 app.use('/user',userRoute);
+app.use('/customer',customerRoute);
 
 //create customer
 app.post('/create-customer', async (req, res) => {
