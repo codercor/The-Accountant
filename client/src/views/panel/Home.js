@@ -38,8 +38,12 @@ export default function Home() {
     }
 
     return (
-        <Container>
-            <Grid container justifyContent="center" alignItems="center" rowSpacing={3} mt={1} >
+        <Container sx={
+            {
+                paddingBottom: "50px",
+            }
+        }>
+            <Grid container justifyContent="center" alignItems="center" rowSpacing={3} mt={1} mb={1} >
                 <Grid item md={12} xs={12}>
                     <Typography variant="h4" >Home</Typography>
                 </Grid>

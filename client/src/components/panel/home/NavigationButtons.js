@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function NavigationButtons({ links }) {
     return (
         <Box>
-            <Grid mt={5} container height="120px" spacing={2}>
+            <Grid mt={5}  container spacing={2}>
                 {links.map((link) => <Grid key={link.color + link.title} item xs={6} md={4}>
                     <Button LinkComponent={Link} fullWidth sx={
                         {
