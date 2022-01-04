@@ -7,9 +7,20 @@ export const fetchCustomers = createAsyncThunk('customer/fetchCustomers', async 
         name: customer.name,
         address: customer.address,
         uid: customer.uid,
+        companyName: customer.companyName,
         telefon: customer.telefon,
         email: customer.email
     }))
+})
+
+export const deleteCustomer = createAsyncThunk('customer/deleteCustomer',async(id)=>{
+    let deleted = await axios.delete(`/customer/${id}`)
+    return deleted;
+})
+
+export const editCustomer = createAsyncThunk('customer/editCustomer',async(customer)=>{
+    let edited = await axios.put(`/customer/${customer.id}`,customer)
+    return edited;
 })
 
 export const createCustomer = createAsyncThunk('customer/createCustomer', async (customer) => {
@@ -20,6 +31,7 @@ export const createCustomer = createAsyncThunk('customer/createCustomer', async 
         address: newCustomer.data.address,
         uid: newCustomer.data.uid,
         telefon: newCustomer.data.telefon,
+        companyName: newCustomer.data.companyName,
         email: newCustomer.data.email
     }
 });
@@ -32,6 +44,7 @@ export const customerSlice = createSlice({
             name: '',
             address: '',
             uid: '',
+            companyName:'',
             telefon: '',
             email: ''
         },
@@ -51,6 +64,7 @@ export const customerSlice = createSlice({
                 name: '',
                 address: '',
                 uid: '',
+                companyName:'',
                 telefon: '',
                 email: ''
             };
@@ -64,6 +78,9 @@ export const customerSlice = createSlice({
         });
         builder.addCase(createCustomer.fulfilled, (state, action) => {
             state.customers.push(action.payload);
+        });
+        builder.addCase(deleteCustomer.fulfilled,(state,action)=>{
+            fetchCustomers()
         })
     }
 })

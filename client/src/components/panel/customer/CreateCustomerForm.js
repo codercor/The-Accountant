@@ -13,7 +13,7 @@ export default function Customer() {
     const handleChange = (e) =>{
         dispatch(setNewCustomer({...customer, [e.target.name]: e.target.value}))
     }
-    const createCustomer = (e) => {
+    const handleCreateCustomer = (e) => {
        dispatch(createCustomer(customer))
       // dispatch(fetchCustomers())
     }
@@ -35,13 +35,15 @@ export default function Customer() {
                 <Grid item md={6} xs={12}>
                     <TextField value={customer.telefon} name="telefon" onChange={handleChange} fullWidth label="Telefon" />
                 </Grid>
-
+                <Grid item md={6} xs={12}>
+                    <TextField value={customer.companyName} name="companyName" onChange={handleChange} fullWidth label="Company Name" />
+                </Grid>
                 <Grid item md={6} xs={12}>
                     <TextField value={customer.email} name="email" onChange={handleChange} fullWidth label="Email" />
                 </Grid>
                 <Grid item md={6} xs={12}>
                     <Button variant="outlined" fullWidth onClick={() => {
-                        createCustomer();
+                        handleCreateCustomer();
                     }}>Save</Button>
                 </Grid>
 

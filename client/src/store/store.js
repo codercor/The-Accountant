@@ -13,11 +13,11 @@ const reducers = combineReducers({
 });
 
 
-const persistConfig = {
+const persistedReducer = persistReducer({
     key: 'root',
     storage,
-};
-const persistedReducer = persistReducer(persistConfig, reducers);
+    whitelist: ['user']
+}, reducers);
 const store = configureStore({
     reducer: persistedReducer,
     middleware: [thunk],

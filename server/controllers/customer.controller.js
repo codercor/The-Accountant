@@ -19,11 +19,14 @@ const getById = async (req, res) => {
 }
 
 const create = async (req, res) => {
+    console.log(req.body);
     try {
         const customer = await customerModel.create(req.body);
         await customer.save();
+        console.log("ADDED",customer);
         res.status(200).json(customer);
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 }
