@@ -13,7 +13,7 @@ export default function Home() {
         { title: "Offer", to: '/panel/offer', color: "warning" },
         { title: "Contract Note", to: '/panel/contract-note', color: "info" },
         { title: "Invoice", to: '/panel/invoice', color: "secondary" },
-        { title: "Email", to: '/panel/email', color: "error" },
+        { title: "Todo", to: '/panel/todo', color: "error" },
     ];
     const user = useSelector(state => state.user.user)
     useEffect(() => {

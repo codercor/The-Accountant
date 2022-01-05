@@ -13,16 +13,14 @@ const authController = {
     login: (req, res) => { //localhost:3000/auth/login
 
         const { username, password } = req.body;
-        console.log(username,password);
         //check if username and password are correct from database
         userModel.findOne({ username,password }, (err, user) => {
             if (err || !user) {
                 res.status(401).json({ message: 'Invalid username or password' });
             } else {
-                console.log("GÖNDERİLEN ", user)
                     res.json({
                         message: 'Login successful',
-                        token: jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '5h' }),
+                        token: jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '5h' }),
                         user: user
                     });
             }

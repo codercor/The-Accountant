@@ -2,7 +2,7 @@ const customerModel = require('../models/customer.model');
 
 const getAll = async (req, res) => {
     try {
-        const customers = await customerModel.find({});
+        const customers = await customerModel.find({ userId: req.user._id });
         res.status(200).json(customers);
     } catch (err) {
         res.status(500).json(err);
@@ -19,9 +19,9 @@ const getById = async (req, res) => {
 }
 
 const create = async (req, res) => {
-    console.log(req.body);
+    console.log("USER",req.user)
     try {
-        const customer = await customerModel.create(req.body);
+        const customer = await customerModel.create({...req.body,userId:req.user._id});
         await customer.save();
         console.log("ADDED",customer);
         res.status(200).json(customer);

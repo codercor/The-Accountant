@@ -9,8 +9,11 @@ import {Box} from '@mui/material'
 //panel routes
 import Home from './views/panel/Home';
 import Customer from './views/panel/Customer';
+import Todo from './views/panel/Todo';
+
 import Footer from './components/panel/common/Footer';
-const Panel = {Home,Customer}
+
+const Panel = {Home,Customer,Todo}
 export default function App() {
   return (
     <Box >
@@ -22,6 +25,7 @@ export default function App() {
         <Route path="/panel">
           <Route index element={<Panel.Home/>} />
           <Route path="customer" element={<Panel.Customer/>} />
+          <Route path="todo" element={<Panel.Todo/>} />
         </Route> 
       </Routes>
 
