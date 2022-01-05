@@ -7,11 +7,13 @@ import thunk from 'redux-thunk';
 import userSlice from './slices/userSlice';
 import customerSlice from './slices/customerSlice';
 import todoSlice from './slices/todoSlice';
+import productSlice from './slices/productSlice';
 
 const reducers = combineReducers({
     user: userSlice,
     customer: customerSlice,
     todo: todoSlice,
+    product: productSlice,
 });
 
 

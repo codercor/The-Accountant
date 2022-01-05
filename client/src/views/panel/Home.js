@@ -9,7 +9,7 @@ export default function Home() {
     const dispatch = useDispatch()
     const links = [
         { title: "Customer", to: '/panel/customer', color: "primary" },
-        { title: "Products", to: '/panel/products', color: "success" },
+        { title: "Products", to: '/panel/product', color: "success" },
         { title: "Offer", to: '/panel/offer', color: "warning" },
         { title: "Contract Note", to: '/panel/contract-note', color: "info" },
         { title: "Invoice", to: '/panel/invoice', color: "secondary" },
