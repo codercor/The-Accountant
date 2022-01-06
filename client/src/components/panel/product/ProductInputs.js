@@ -19,34 +19,6 @@ export default function Product() {
         // dispatch(fetchProducts())
     }
 
-    const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(props, ref) {
-        const { onChange, ...other } = props;
-
-        return (
-            <NumberFormat
-                {...other}
-                getInputRef={ref}
-                onValueChange={(values) => {
-                    onChange({
-                        target: {
-                            name: props.name,
-                            value: values.value,
-                        },
-                    });
-                }}
-                thousandSeparator
-                isNumericString
-                prefix="€ "
-            />
-        );
-    });
-
-    NumberFormatCustom.propTypes = {
-        name: PropTypes.string.isRequired,
-        onChange: PropTypes.func.isRequired,
-    };
-
-
     return (
         <Container>
             <Grid container justifyContent="center" alignItems="center" rowSpacing={3} mt={1} >
@@ -57,10 +29,7 @@ export default function Product() {
                     <TextField value={product.title} name="title" onChange={handleChange} fullWidth label="Title" />
                 </Grid>
                 <Grid item md={6} xs={12}>
-                    <TextField
-                        InputProps={{
-                            inputComponent: NumberFormatCustom,
-                        }} id="formatted-numberformat-input" value={product.price} name="price" onChange={handleChange} fullWidth label="Price" variant="outlined" />
+                    <TextField type="number" value={product.price} name="price" onChange={handleChange} fullWidth label="Price" variant="outlined" />
                 </Grid>
 
                 <Grid item md={7} xs={12}>
@@ -71,14 +40,15 @@ export default function Product() {
                         id="unit-select"
                         label="Unit"
                         name="unit"
-                        value="meter"
+                        value={product.unit}
                         onChange={handleChange}
                     >
+                        <MenuItem value="piece">Piece</MenuItem>
                         <MenuItem value="meter">Meter</MenuItem>
-                        <MenuItem value="minute">Minute</MenuItem>
+                        <MenuItem value="centimeter">Centimeter</MenuItem>
                         <MenuItem value="hour">Hour</MenuItem>
                         <MenuItem value="squaremeter">m²</MenuItem>
-                        <MenuItem value="hour">Piece</MenuItem>
+                        <MenuItem value="liter">Liter</MenuItem>
 
                     </Select>
                 </Grid>

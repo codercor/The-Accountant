@@ -8,12 +8,12 @@ import NavigationButtons from '../../components/panel/home/NavigationButtons'
 export default function Home() {
     const dispatch = useDispatch()
     const links = [
+        { title: "Todo", to: '/panel/todo', color: "error" },
         { title: "Customer", to: '/panel/customer', color: "primary" },
         { title: "Products", to: '/panel/product', color: "success" },
         { title: "Offer", to: '/panel/offer', color: "warning" },
         { title: "Contract Note", to: '/panel/contract-note', color: "info" },
         { title: "Invoice", to: '/panel/invoice', color: "secondary" },
-        { title: "Todo", to: '/panel/todo', color: "error" },
     ];
     const user = useSelector(state => state.user.user)
     useEffect(() => {

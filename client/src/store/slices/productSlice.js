@@ -38,7 +38,7 @@ export const productSlice = createSlice({
             id: '',
             title:'',
             price:0,
-            unit:'',
+            unit:'piece',
         },
         products: [],
     },
@@ -55,7 +55,7 @@ export const productSlice = createSlice({
                 id: '',
                 title:'',
                 price:0,
-                unit:'',
+                unit:'piece',
             };
         }
     },
