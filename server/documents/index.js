@@ -86,7 +86,7 @@ return `
                    <td colspan="2">
                       <table>
                          <tr>
-                            <td class="title"> <img width=100px height=100px style="border-radius=50px;" src="https://i.ibb.co/gTm8QS6/cutcut.png"></td>
+                            <td class="title"> <img width=100px height=100px style="border-radius=50px;" src="https://ui-avatars.com/api/?color=ff0000&name=The%20Accountant"></td>
                             <td>
                                Datum: ${`${today.getDate()}. ${today.getMonth() + 1}. ${today.getFullYear()}.`}
                             </td>

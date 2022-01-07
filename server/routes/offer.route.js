@@ -6,7 +6,10 @@ router.route("/")
     .get(offerController.getAll)
     .post(offerController.create)
 
+router.route('/pdf/:id').get(offerController.pdf);
+
 router.route('/:id')
     .get(offerController.getById)
+
 
 module.exports = router;
