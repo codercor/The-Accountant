@@ -14,6 +14,7 @@ const userRoute = require('./routes/user.route');
 const customerRoute = require('./routes/customer.route');
 const todoRoute = require('./routes/todo.route');
 const productRoute = require('./routes/product.route');
+const offerRoute = require('./routes/offer.route');
 
 app.use(cors()); //use cors
 app.use(express.urlencoded({extended: true})); 
@@ -37,5 +38,6 @@ app.use('/user',userRoute);
 app.use('/customer',customerRoute);
 app.use('/todo',todoRoute)
 app.use('/product',productRoute)
+app.use('/offer',offerRoute)
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

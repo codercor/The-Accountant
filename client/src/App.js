@@ -11,10 +11,11 @@ import Home from './views/panel/Home';
 import Customer from './views/panel/Customer';
 import Todo from './views/panel/Todo';
 import Product from './views/panel/Product';
+import Offer from './views/panel/Offer';
 
 import Footer from './components/panel/common/Footer';
 
-const Panel = {Home,Customer,Todo,Product}
+const Panel = {Home,Customer,Todo,Product,Offer}
 export default function App() {
   return (
     <Box >
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="customer" element={<Panel.Customer/>} />
           <Route path="todo" element={<Panel.Todo/>} />
           <Route path="product" element={<Panel.Product/>} />
+          <Route path="offer" element={<Panel.Offer/>} />
         </Route> 
       </Routes>
 
