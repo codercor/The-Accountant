@@ -13,10 +13,12 @@ const getAll = async (req, res) => {
 const pdf = async (req,res)=> {
     try {
         const offer = await offerModel.findById(req.params.id).populate('products').populate('customer').populate('userId');
+        console.log("İŞLEMDE");
+        await generatePDF(offer);
+        console.log("PDF Oluşturuldu");
         res.status(200).json(offer);
-        let response = generatePDF(offer);
-        fs.writeFileSync('offer.html', response);
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 }

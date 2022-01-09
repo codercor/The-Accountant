@@ -2,8 +2,8 @@ const userModel = require('../models/user.model');
 
 module.exports.update = (req, res) => {
 
-    const { name, email, companyName, address, bankAccount, telefon } = req.body;
-    userModel.findOneAndUpdate({ username: req.user.username }, { name, email, companyName, address, bankAccount, telefon }, (err, user) => {
+    const { name, email, companyName, address, bankAccount, telefon,uid } = req.body;
+    userModel.findOneAndUpdate({ username: req.user.username }, { name, email, companyName, address, bankAccount, telefon ,uid}, (err, user) => {
         
         if (err){
             console.log(err);

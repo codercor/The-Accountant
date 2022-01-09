@@ -14,9 +14,11 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "handlebars": "^4.7.7",
     "html-pdf": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.2.0",
-    "mongoose": "^6.0.14"
+    "mongoose": "^6.0.14",
+    "puppeteer": "^13.0.1"
   }
 }
