@@ -4,9 +4,12 @@ import { setUser } from '../../store/slices/userSlice'
 import { Container, Grid, Typography, TextField, Button } from '@mui/material'
 import axios from '../../service/axios'
 import NavigationButtons from '../../components/panel/home/NavigationButtons'
+import { useNavigate } from 'react-router-dom'
 
 export default function Home() {
+   
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const links = [
         { title: "Todo", to: '/panel/todo', color: "error" },
         { title: "Customer", to: '/panel/customer', color: "primary" },
@@ -16,8 +19,9 @@ export default function Home() {
         { title: "Invoice", to: '/panel/invoice', color: "secondary" },
     ];
     const user = useSelector(state => state.user.user)
+    const token = useSelector(state => state.user.token)
     useEffect(() => {
-        console.log(user)
+        if(!token) navigate('/login')
     }, []);
     const [userData, setUserData] = useState({
         name: user.name,

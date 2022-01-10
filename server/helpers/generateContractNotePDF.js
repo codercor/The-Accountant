@@ -4,34 +4,35 @@ const path = require("path");
 const puppeteer = require('puppeteer');
 const handlebars = require("handlebars");
 
-module.exports = async function generatePDF(offer) {
-    console.log("PDF OLUŞTURULUYOR", offer.customer.name);
+module.exports = async function generatePDF(contractNote) {
+    console.log("PDF OLUŞTURULUYOR", contractNote.customer.name);
     let mockData = {
         customer: {
-            name: offer.customer.name,
-            address: offer.customer.address,
-            uid: offer.customer.uid,
-            companyName: offer.customer.companyName,
-            telefon: offer.customer.telefon,
-            email: offer.customer.email
+            name: contractNote.customer.name,
+            address: contractNote.customer.address,
+            uid: contractNote.customer.uid,
+            companyName: contractNote.customer.companyName,
+            telefon: contractNote.customer.telefon,
+            email: contractNote.customer.email
         },
-        products: offer.products.map((p)=>({
+        products: contractNote.products.map((p)=>({
             title: p.title,
             price: p.price,
             unit: p.unit,
         })),
         user:{
-            name: offer.userId.name,
-            email: offer.userId.email,
-            telefon: offer.userId.telefon,
-            address: offer.userId.address,
-            companyName: offer.userId.companyName,
-            uid: offer.userId.uid,
-            bankAccount: offer.userId.bankAccount,
-        }
+            name: contractNote.userId.name,
+            email: contractNote.userId.email,
+            telefon: contractNote.userId.telefon,
+            address: contractNote.userId.address,
+            companyName: contractNote.userId.companyName,
+            uid: contractNote.userId.uid,
+            bankAccount: contractNote.userId.bankAccount,
+        },
+        total: contractNote.products.reduce(function(a, b) { return a + b.price; }, 0)
     }
     const today = new Date();
-    var templateHtml = fs.readFileSync(path.join(process.cwd(), 'helpers/offerTemplate.html'), 'utf8');
+    var templateHtml = fs.readFileSync(path.join(process.cwd(), 'helpers/contractNoteTemplate.html'), 'utf8');
     var template = handlebars.compile(templateHtml);
     var finalHtml = encodeURIComponent(template(mockData));
     var options = {
@@ -44,7 +45,7 @@ module.exports = async function generatePDF(offer) {
             bottom: "100px"
         },
         printBackground: true,
-        path: `public/${offer._id}.pdf`
+        path: `public/${contractNote._id}.pdf`
     }
     const browser = await puppeteer.launch({
         args: ['--no-sandbox'],

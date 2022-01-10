@@ -4,34 +4,35 @@ const path = require("path");
 const puppeteer = require('puppeteer');
 const handlebars = require("handlebars");
 
-module.exports = async function generatePDF(offer) {
-    console.log("PDF OLUŞTURULUYOR", offer.customer.name);
+module.exports = async function generatePDF(invoice) {
+    console.log("PDF OLUŞTURULUYOR", invoice.customer.name);
     let mockData = {
         customer: {
-            name: offer.customer.name,
-            address: offer.customer.address,
-            uid: offer.customer.uid,
-            companyName: offer.customer.companyName,
-            telefon: offer.customer.telefon,
-            email: offer.customer.email
+            name: invoice.customer.name,
+            address: invoice.customer.address,
+            uid: invoice.customer.uid,
+            companyName: invoice.customer.companyName,
+            telefon: invoice.customer.telefon,
+            email: invoice.customer.email
         },
-        products: offer.products.map((p)=>({
+        products: invoice.products.map((p)=>({
             title: p.title,
             price: p.price,
             unit: p.unit,
         })),
         user:{
-            name: offer.userId.name,
-            email: offer.userId.email,
-            telefon: offer.userId.telefon,
-            address: offer.userId.address,
-            companyName: offer.userId.companyName,
-            uid: offer.userId.uid,
-            bankAccount: offer.userId.bankAccount,
-        }
+            name: invoice.userId.name,
+            email: invoice.userId.email,
+            telefon: invoice.userId.telefon,
+            address: invoice.userId.address,
+            companyName: invoice.userId.companyName,
+            uid: invoice.userId.uid,
+            bankAccount: invoice.userId.bankAccount,
+        },
+        total: invoice.products.reduce(function(a, b) { return a + b.price; }, 0)
     }
     const today = new Date();
-    var templateHtml = fs.readFileSync(path.join(process.cwd(), 'helpers/offerTemplate.html'), 'utf8');
+    var templateHtml = fs.readFileSync(path.join(process.cwd(), 'helpers/invoiceTemplate.html'), 'utf8');
     var template = handlebars.compile(templateHtml);
     var finalHtml = encodeURIComponent(template(mockData));
     var options = {
@@ -44,7 +45,7 @@ module.exports = async function generatePDF(offer) {
             bottom: "100px"
         },
         printBackground: true,
-        path: `public/${offer._id}.pdf`
+        path: `public/${invoice._id}.pdf`
     }
     const browser = await puppeteer.launch({
         args: ['--no-sandbox'],

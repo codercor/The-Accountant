@@ -12,16 +12,18 @@ import Customer from './views/panel/Customer';
 import Todo from './views/panel/Todo';
 import Product from './views/panel/Product';
 import Offer from './views/panel/Offer';
+import ContractNote from './views/panel/ContractNote';
+import Invoice from './views/panel/Invoice';
 
 import Footer from './components/panel/common/Footer';
 
-const Panel = {Home,Customer,Todo,Product,Offer}
+const Panel = {Home,Customer,Todo,Product,Offer,ContractNote,Invoice};
 export default function App() {
   return (
     <Box >
       <AppBar />
       <Routes>
-        <Route path="/" element={<CreateCustomer />} />
+        <Route path="/" element={<Panel.Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/panel">
@@ -30,6 +32,8 @@ export default function App() {
           <Route path="todo" element={<Panel.Todo/>} />
           <Route path="product" element={<Panel.Product/>} />
           <Route path="offer" element={<Panel.Offer/>} />
+          <Route path="contract-note" element={<Panel.ContractNote/>} />
+          <Route path="invoice" element={<Panel.Invoice/>} />
         </Route> 
       </Routes>
 

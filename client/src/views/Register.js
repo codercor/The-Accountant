@@ -1,6 +1,6 @@
 import { Container, Stack, TextField, Grid, Typography, Button } from '@mui/material'
 import React, { useState } from 'react'
-
+import { useNavigate } from 'react-router-dom'
 export default function Register() {
     const [user, setUser] = useState({
         username: '',
@@ -10,6 +10,7 @@ export default function Register() {
         confirmEmail: '',
         name: ''
     });
+    const navigate = useNavigate();
     const register = () => {
         if((user.password != user.confirmPassword)||(user.email != user.confirmEmail)){
             alert("Passwords or emails do not match!");
@@ -26,6 +27,7 @@ export default function Register() {
                     alert("Successfully registered");
                 }else{
                     alert(data.message);
+                    navigate('/login');
                 }
             });
         }

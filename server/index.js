@@ -15,10 +15,14 @@ const customerRoute = require('./routes/customer.route');
 const todoRoute = require('./routes/todo.route');
 const productRoute = require('./routes/product.route');
 const offerRoute = require('./routes/offer.route');
+const contractNoteRoute = require('./routes/contractNote.route');
+const invoiceRoute = require('./routes/invoice.route');
 
 app.use(cors()); //use cors
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json()); //for each request, parse body of request
+
+app.use(express.static('public'));
 
 //db connection
 mongoose.connect(process.env.DB_CONNECTION_STRING),
@@ -39,5 +43,7 @@ app.use('/customer',customerRoute);
 app.use('/todo',todoRoute)
 app.use('/product',productRoute)
 app.use('/offer',offerRoute)
+app.use('/contractNote',contractNoteRoute);
+app.use('/invoice',invoiceRoute);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

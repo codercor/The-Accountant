@@ -9,6 +9,8 @@ import customerSlice from './slices/customerSlice';
 import todoSlice from './slices/todoSlice';
 import productSlice from './slices/productSlice';
 import offerSlice from './slices/offerSlice';
+import contractNoteSlice from './slices/contractNoteSlice';
+import invoiceSlice from './slices/invoiceSlice';
 
 const reducers = combineReducers({
     user: userSlice,
@@ -16,6 +18,8 @@ const reducers = combineReducers({
     todo: todoSlice,
     product: productSlice,
     offer: offerSlice,
+    contractNote: contractNoteSlice,
+    invoice: invoiceSlice
 });
 
 

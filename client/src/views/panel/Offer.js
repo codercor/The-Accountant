@@ -17,6 +17,7 @@ export default function Offser() {
             <OfferInputForm/>
             <Button onClick={()=>{
                 dispatch(createOffer(newOffer));
+                dispatch(fetchOffers());
             }} sx={{marginTop:'10px'}} fullWidth variant="contained" color="warning">Create Offer</Button>
             <OffersTable offers={offers} />
         </Container>

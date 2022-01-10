@@ -34,7 +34,9 @@ export const userSlice = createSlice({
                 telefon: '',
                 email: ''
             };
-            //window.location.href = '/login';
+            setTimeout(() => {
+                window.location.href = '/login';
+            }, 3000);
             console.log("clearUser");
         },
     }

@@ -1,6 +1,6 @@
-const generatePDF  = require('../helpers/generateOfferPDF');
+const generatePDF = require('../helpers/generateOfferPDF');
 const offerModel = require('../models/offer.model');
-const fs = require('fs');
+const fs = require('fs/promises');
 const getAll = async (req, res) => {
     try {
         const offers = await offerModel.find({ userId: req.user._id }).populate('products').populate('customer').populate('userId');
@@ -10,13 +10,18 @@ const getAll = async (req, res) => {
     }
 }
 
-const pdf = async (req,res)=> {
+const pdf = async (req, res) => {
     try {
         const offer = await offerModel.findById(req.params.id).populate('products').populate('customer').populate('userId');
         console.log("İŞLEMDE");
         await generatePDF(offer);
+        let pdfData = await fs.readFile(`public/${offer._id}.pdf`);
+        console.log("PDF DEN DONEN ", pdfData);
         console.log("PDF Oluşturuldu");
-        res.status(200).json(offer);
+        res.status(200).download(`public/${offer._id}.pdf`)
+        res.on('finish', () => {
+            fs.unlink(`public/${offer._id}.pdf`);
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -33,11 +38,11 @@ const getById = async (req, res) => {
 }
 
 const create = async (req, res) => {
-    console.log("USER",req.user)
+    console.log("USER", req.user)
     try {
-        const offer = await offerModel.create({...req.body,userId:req.user._id});
+        const offer = await offerModel.create({ ...req.body, userId: req.user._id });
         await offer.save();
-        console.log("ADDED",offer);
+        console.log("ADDED", offer);
         res.status(200).json(offer);
     } catch (err) {
         console.log(err);

@@ -7,7 +7,15 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
+
+import { clearUser } from '../store/slices/userSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
+
 export default function ButtonAppBar() {
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -25,9 +33,13 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className='logo-text' to={"/"} component={Link} sx={{ flexGrow: 1 }}>
             The Accountant
           </Typography>
+          {
+            !user.token ? <><Button component={Link} to="/login" color="inherit">Login</Button>
+            <Button component={Link} to="/register" color="inherit">Register</Button></> : <Button onClick={()=>{
+              dispatch(clearUser());
+            }} color="inherit">Logout</Button>
+          }
 
-          <Button component={Link} to="/login" color="inherit">Login</Button>
-          <Button component={Link} to="/register" color="inherit">Register</Button>
         </Toolbar>
       </AppBar>
     </Box>

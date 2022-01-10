@@ -1,21 +1,21 @@
 import { createSlice, createAsyncThunk, nanoid } from '@reduxjs/toolkit'
 import axios from '../../service/axios'
-export const fetchOffers = createAsyncThunk('offer/fetchOffers', async () => {
-    let offers = await axios.get('/offer')
-    return offers.data;
+export const fetchInvoices = createAsyncThunk('invoice/fetchInvoices', async () => {
+    let invoices = await axios.get('/invoice')
+    return invoices.data;
 })
 
-export const generateOfferPDF = createAsyncThunk('offer/generateOfferPDF', async (offerId) => {
-    let pdf = await axios.get(`/offer/pdf/${offerId}`,{
+export const generateInvoicePDF = createAsyncThunk('invoice/generateInvoicePDF', async (invoiceId) => {
+    let pdf = await axios.get(`/invoice/pdf/${invoiceId}`,{
         responseType: 'arraybuffer',
         responseEnconding: 'binary'
     })
     return pdf.data;
 });
 
-export const createOffer = createAsyncThunk('offer/createOffer', async (offer) => {
-    let newOffer = await axios.post('/offer', offer)
-    return newOffer;
+export const createInvoice = createAsyncThunk('invoice/createInvoice', async (invoice) => {
+    let newInvoice = await axios.post('/invoice', invoice)
+    return newInvoice;
 });
 
 const base64toBlob = (data) => {
@@ -33,37 +33,37 @@ const base64toBlob = (data) => {
     return new Blob([out], { type: 'application/pdf' });
 };
 
-export const offerSlice = createSlice({
-    name: 'offer',
+export const invoiceSlice = createSlice({
+    name: 'invoice',
     initialState: {
-        newOffer: {
+        newInvoice: {
             customer: {}, // { _id:'adadadd' }
             products: [], // [ { _id:'adadadd' }, { _id:'adadadd' } ]
         },
-        offers: [],
+        invoices: [],
     },
     reducers: {
-        setNewOffer: (state, action) => {
-            state.newOffer = action.payload;
+        setNewInvoice: (state, action) => {
+            state.newInvoice = action.payload;
         },
-        setOffers: (state, action) => {
-            state.offers = action.payload;
+        setInvoices: (state, action) => {
+            state.invoices = action.payload;
         },
-        clearNewOffer: (state) => {
-            state.newOffer = {
+        clearNewInvoice: (state) => {
+            state.newInvoice = {
                 customer: {},
                 products: [],
             };
         }
     },
     extraReducers(builder) {
-        builder.addCase(fetchOffers.fulfilled, (state, action) => {
-            state.offers = action.payload;
+        builder.addCase(fetchInvoices.fulfilled, (state, action) => {
+            state.invoices = action.payload;
         });
-        builder.addCase(createOffer.fulfilled, (state, action) => {
+        builder.addCase(createInvoice.fulfilled, (state, action) => {
             console.log("Eklendi");
         });
-        builder.addCase(generateOfferPDF.fulfilled, (state, action) => {
+        builder.addCase(generateInvoicePDF.fulfilled, (state, action) => {
             var blob = new Blob([action.payload], { type: 'application/pdf' });
             const url = URL.createObjectURL(blob);
             window.open(url);
@@ -71,6 +71,6 @@ export const offerSlice = createSlice({
     }
 })
 
-export const { setOffers, clearNewOffer, setNewOffer } = offerSlice.actions
+export const { setInvoices, clearNewInvoice, setNewInvoice } = invoiceSlice.actions
 
-export default offerSlice.reducer
+export default invoiceSlice.reducer

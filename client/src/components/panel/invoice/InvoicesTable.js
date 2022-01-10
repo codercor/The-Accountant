@@ -3,9 +3,9 @@ import React from 'react'
 import { IconButton, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { PictureAsPdf as PDF } from '@mui/icons-material';
 import { useSelector, useDispatch } from 'react-redux';
-import { generateOfferPDF } from '../../../store/slices/offerSlice';
+import { generateInvoicePDF } from '../../../store/slices/invoiceSlice';
 
-export default function OffersTable({ offers }) {
+export default function InvoicesTable({ invoices }) {
     const dispatch = useDispatch();
     return (
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -19,28 +19,28 @@ export default function OffersTable({ offers }) {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {offers.map((offer) => (
+                {invoices.map((invoice) => (
                     <TableRow
-                        key={offer._id}
+                        key={invoice._id}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                         <TableCell component="th" scope="row">
-                            {offer.customer.companyName}
+                            {invoice.customer.companyName}
                         </TableCell>
                         <TableCell component="th" scope="row">
-                            {offer.customer.name}
+                            {invoice.customer.name}
                         </TableCell>
                         <TableCell component="th" scope="row">
                             ----
                         </TableCell>
                         <TableCell component="th" scope="row">
-                            {offer.products.length}
+                            {invoice.products.length}
                         </TableCell>
                         <TableCell>
                             <IconButton onClick={
                                 () => {
                                     console.log("HEY HEY HEY")
-                                    dispatch(generateOfferPDF(offer._id));
+                                    dispatch(generateInvoicePDF(invoice._id));
                                 }
                             } sx={
                                 {
