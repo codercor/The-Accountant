@@ -74,7 +74,7 @@ export const customerSlice = createSlice({
     },
     extraReducers(builder) {
         builder.addCase(fetchCustomers.fulfilled, (state, action) => {
-            state.customers = action.payload;
+            state.customers = action.payload; //action.payload fetchCustomers fonksiyonundan dönen değerdir yani serverdan çektiğimiz customers array'i
         });
         builder.addCase(createCustomer.fulfilled, (state, action) => {
             state.customers.push(action.payload);

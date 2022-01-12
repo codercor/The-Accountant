@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../../service/axios'
 import { setNewCustomer,clearNewCustomer,createCustomer,fetchCustomers } from '../../../store/slices/customerSlice'
 
-export default function Customer() {
+export default function CreateCustomerForm() {
     const customer = useSelector(state => state.customer.newCustomer)
     useEffect(() => {
         console.log(customer)

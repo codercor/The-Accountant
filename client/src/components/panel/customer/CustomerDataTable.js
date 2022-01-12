@@ -22,8 +22,8 @@ export default function CustomerDataTable() {
        await dispatch(deleteCustomer(id));
         dispatch(fetchCustomers());
     }
-    useEffect(() => {
-        dispatch(fetchCustomers());
+    useEffect(() => { //ikinci parametresinde boş bir dizi varsa bunun gibi yalnızca bir kere çalışır.
+        dispatch(fetchCustomers()); //customerları serverdan çekiyoruz.
     }, [])
     const columns = [{
         field: 'actions',
